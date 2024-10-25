@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/buttonLayout"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MyRuns2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/textViewTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/textViewDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/textViewDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Distance"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/textViewCalories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calories"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/textViewHeartRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Heart Rate"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/textViewComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comment"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SAVE"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@android:color/holo_purple"/>
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CANCEL"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@android:color/holo_purple"/>
+    </LinearLayout>
+</RelativeLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:orientation="vertical"-->
+    <!--    android:padding="16dp">-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="MyRuns2"-->
+    <!--        android:textSize="18sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:layout_marginBottom="16dp"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewDate"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Date"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:background="?android:attr/selectableItemBackground"-->
+    <!--        android:clickable="true"-->
+    <!--        android:focusable="true"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewTime"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Time"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:background="?android:attr/selectableItemBackground"-->
+    <!--        android:clickable="true"-->
+    <!--        android:focusable="true"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewDuration"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Duration"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:background="?android:attr/selectableItemBackground"-->
+    <!--        android:clickable="true"-->
+    <!--        android:focusable="true"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewDistance"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Distance"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:background="?android:attr/selectableItemBackground"-->
+    <!--        android:clickable="true"-->
+    <!--        android:focusable="true"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewCalories"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Calories"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:background="?android:attr/selectableItemBackground"-->
+    <!--        android:clickable="true"-->
+    <!--        android:focusable="true"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewHeartRate"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Heart Rate"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:background="?android:attr/selectableItemBackground"-->
+    <!--        android:clickable="true"-->
+    <!--        android:focusable="true"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewComment"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Comment"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:background="?android:attr/selectableItemBackground"-->
+    <!--        android:clickable="true"-->
+    <!--        android:focusable="true"/>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:layout_marginTop="16dp">-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/buttonSave"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text="SAVE"/>-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/buttonCancel"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text="CANCEL"/>-->
+    <!--    </LinearLayout>-->
+    <!--</LinearLayout>-->

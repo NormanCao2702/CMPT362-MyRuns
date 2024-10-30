@@ -148,7 +148,6 @@ class SettingsFragment: Fragment()  {
         sharedPreferences?.edit()?.putBoolean("privacy_setting", isChecked)?.apply()
     }
 
-    // You might want to load the saved privacy setting when the fragment is created
     private fun loadPrivacySetting() {
         val sharedPreferences = activity?.getSharedPreferences("MyRuns_Preferences", Context.MODE_PRIVATE)
         val isPrivate = sharedPreferences?.getBoolean("privacy_setting", false) ?: false

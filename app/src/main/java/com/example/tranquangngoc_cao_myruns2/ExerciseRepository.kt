@@ -14,8 +14,11 @@ class ExerciseRepository(private val exerciseDao: ExerciseEntryDao) {
         return exerciseDao.getAllEntries()
     }
 
-    suspend fun deleteEntry(entry: ExerciseEntry) {
-        exerciseDao.deleteEntry(entry)
+    suspend fun deleteEntry(entryId: Long) {
+        val entry = getEntryById(entryId)
+        if (entry != null) {
+            exerciseDao.deleteEntry(entry)
+        }
     }
 
     suspend fun getEntryById(id: Long): ExerciseEntry? {

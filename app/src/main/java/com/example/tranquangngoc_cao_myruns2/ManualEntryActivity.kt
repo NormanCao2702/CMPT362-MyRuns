@@ -104,8 +104,8 @@ class ManualEntryActivity : AppCompatActivity() {
     private fun showInputDialog(field: String) {
         val input = EditText(this)
         input.inputType = when (field) {
-            "Duration", "Calories", "Heart Rate" -> InputType.TYPE_CLASS_NUMBER
-            "Distance" -> InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+            "Calories", "Heart Rate" -> InputType.TYPE_CLASS_NUMBER
+            "Duration", "Distance" -> InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             else -> InputType.TYPE_CLASS_TEXT
         }
 

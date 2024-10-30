@@ -35,4 +35,10 @@ object Util {
         var ret = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
         return ret
     }
+
+    fun formatDuration(durationInMinutes: Double): String {
+        val minutes = durationInMinutes.toInt()
+        val seconds = ((durationInMinutes - minutes) * 60).toInt()
+        return "${minutes}mins ${seconds}secs"
+    }
 }

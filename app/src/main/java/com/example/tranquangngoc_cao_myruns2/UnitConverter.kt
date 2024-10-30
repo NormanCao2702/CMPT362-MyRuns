@@ -3,7 +3,7 @@ package com.example.tranquangngoc_cao_myruns2
 import java.util.Locale
 
 object UnitConverter {
-    private fun milesToKilometers(miles: Double): Double {
+    fun milesToKilometers(miles: Double): Double {
         return miles * 1.60934
     }
 

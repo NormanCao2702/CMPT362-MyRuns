@@ -10,7 +10,7 @@ interface ExerciseEntryDao {
     @Insert
     suspend fun insert(entry: ExerciseEntry): Long
 
-    @Query("SELECT * FROM exercise_entries ORDER BY dateTime DESC")
+    @Query("SELECT * FROM exercise_entries ORDER BY dateTime ASC")
     suspend fun getAllEntries(): List<ExerciseEntry>
 
     @Delete

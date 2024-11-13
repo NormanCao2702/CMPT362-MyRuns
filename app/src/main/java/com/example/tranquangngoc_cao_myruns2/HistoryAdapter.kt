@@ -36,13 +36,18 @@ class HistoryAdapter(
 
         // Format distance based on unit preference
         val distance = if (useMetric) {
-            String.format("%.2f Kilometers", UnitConverter.milesToKilometers(entry.distance))
+//            String.format("%.2f Kilometers", UnitConverter.milesToKilometers(entry.distance))
+            UnitConverter.milesToKilometers(entry.distance)
         } else {
-            String.format("%.2f Miles", entry.distance)
+//            String.format("%.2f Miles", entry.distance)
+            entry.distance
         }
+        val distanceUnit = if (useMetric) "Kilometers" else "Miles"
+        val distanceFormatted = String.format("%.2f %s", distance, distanceUnit)
 
         // Format: "804.67 Kilometers, 0secs"
-        holder.subInfo.text = "$distance, ${Util.formatDuration(entry.duration)}"
+//        holder.subInfo.text = "$distance, ${Util.formatDuration(entry.duration)}"
+        holder.subInfo.text = "$distanceFormatted, ${Util.formatDuration(entry.duration)}"
 
         holder.itemView.setOnClickListener {
             onItemClick(entry)

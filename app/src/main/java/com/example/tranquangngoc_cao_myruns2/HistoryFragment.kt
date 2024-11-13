@@ -54,11 +54,24 @@ class HistoryFragment: Fragment()  {
     }
 
     private fun loadEntries() {
+        val sharedPreferences = requireContext().getSharedPreferences(
+            "MyRuns_Preferences",
+            Context.MODE_PRIVATE
+        )
+        val useMetric = sharedPreferences.getString("unit_preference", "metric") == "metric"
+
         lifecycleScope.launch {
             val entries = withContext(Dispatchers.IO) {
-                repository.getAllEntries()
+                repository.getAllEntries().sortedBy { it.dateTime }
             }
-            adapter.updateEntries(entries)
+
+            // Create new adapter instance with current preference
+            adapter = HistoryAdapter(entries, useMetric) { entry ->
+                val intent = Intent(requireContext(), DisplayEntryActivity::class.java)
+                intent.putExtra("entry_id", entry.id)
+                startActivity(intent)
+            }
+            recyclerView.adapter = adapter
         }
     }
 

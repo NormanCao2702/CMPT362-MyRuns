@@ -65,11 +65,13 @@ class DisplayEntryActivity : AppCompatActivity() {
 
         // Format distance based on unit preference
         val distance = if (useMetric) {
-            String.format("%.2f Kilometers", UnitConverter.milesToKilometers(entry.distance))
+            UnitConverter.milesToKilometers(entry.distance)
         } else {
-            String.format("%.2f Miles", entry.distance)
+            entry.distance
         }
-        findViewById<TextView>(R.id.textDistance).text = distance
+        val distanceUnit = if (useMetric) "Kilometers" else "Miles"
+        val distanceFormatted = String.format("%.2f %s", distance, distanceUnit)
+        findViewById<TextView>(R.id.textDistance).text = distanceFormatted
 
         // Display calories and heart rate
         findViewById<TextView>(R.id.textCalories).text = "${entry.calories} cals"

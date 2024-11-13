@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 class StartFragment : Fragment() {
@@ -45,9 +46,12 @@ class StartFragment : Fragment() {
                     intent.putExtra("activity_type", spinnerActivityType.selectedItem.toString())
                     startActivity(intent)
                 }
-                "GPS", "Automatic" -> {
+                "GPS"-> {
                     val intent = Intent(requireContext(), MapDisplayActivity::class.java)
                     startActivity(intent)
+                }
+                "Automatic" -> {
+                    Toast.makeText(requireContext(), "Button clicked", Toast.LENGTH_SHORT).show()
                 }
             }
         }

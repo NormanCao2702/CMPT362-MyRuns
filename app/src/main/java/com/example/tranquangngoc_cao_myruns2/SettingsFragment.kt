@@ -39,7 +39,7 @@ class SettingsFragment: Fragment()  {
         textViewComments = view.findViewById(R.id.textViewComments)
 
         setupClickListeners()
-        loadSettings()
+//        loadSettings()
 
         return view
     }
@@ -83,7 +83,7 @@ class SettingsFragment: Fragment()  {
             .setSingleChoiceItems(units, checkedItem) { dialog, which ->
                 val selectedUnit = if (which == 0) "metric" else "imperial"
                 saveUnitPreference(selectedUnit)
-                updateUnitPreferenceDisplay(selectedUnit)
+//                updateUnitPreferenceDisplay(selectedUnit)
                 dialog.dismiss()
             }
             .setNegativeButton("Cancel", null)
@@ -123,9 +123,9 @@ class SettingsFragment: Fragment()  {
         return sharedPreferences?.getString("unit_preference", "metric") ?: "metric"
     }
 
-    private fun updateUnitPreferenceDisplay(unit: String) {
-        textViewUnitPreference.text = "Unit Preference"
-    }
+//    private fun updateUnitPreferenceDisplay(unit: String) {
+//        textViewUnitPreference.text = "Unit Preference"
+//    }
 
     // Helpers for SaveComment
     private fun saveComments(comments: String) {
@@ -138,9 +138,9 @@ class SettingsFragment: Fragment()  {
         return sharedPreferences?.getString("comments", "") ?: ""
     }
 
-    private fun updateCommentsDisplay(comments: String) {
-        textViewComments.text = "Please enter your comments"
-    }
+//    private fun updateCommentsDisplay(comments: String) {
+//        textViewComments.text = "Please enter your comments"
+//    }
 
     private fun savePrivacySetting(isChecked: Boolean) {
         // Save the privacy setting to SharedPreferences
@@ -159,9 +159,9 @@ class SettingsFragment: Fragment()  {
         loadPrivacySetting()
     }
 
-    private fun loadSettings() {
-        updateUnitPreferenceDisplay(loadUnitPreference())
-        updateCommentsDisplay(loadComments())
-    }
+//    private fun loadSettings() {
+//        updateUnitPreferenceDisplay(loadUnitPreference())
+//        updateCommentsDisplay(loadComments())
+//    }
 
 }

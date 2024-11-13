@@ -21,6 +21,12 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // Set default unit preference if not set
+        val sharedPreferences = getSharedPreferences("MyRuns_Preferences", MODE_PRIVATE);
+        if (!sharedPreferences.contains("unit_preference")) {
+            sharedPreferences.edit().putString("unit_preference", "metric").apply()
+        }
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 

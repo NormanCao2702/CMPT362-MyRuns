@@ -140,15 +140,24 @@ class ManualEntryActivity : AppCompatActivity() {
 
     private fun saveEntry() {
         lifecycleScope.launch(Dispatchers.IO) {
+            // Get the user's unit preference
+            val sharedPreferences = getSharedPreferences("MyRuns_Preferences", MODE_PRIVATE)
+            val useMetric = sharedPreferences.getString("unit_preference", "metric") == "metric"
             // Get current timestamp if no date/time was selected
             val currentTimeMillis = System.currentTimeMillis()
+            val distanceInMiles = if (useMetric) {
+                UnitConverter.kilometersToMiles(distance)
+            } else {
+                distance
+            }
+
 
             val entry = ExerciseEntry(
                 inputType = "Manual Entry",
                 activityType = activityType, // get from spinner
                 dateTime = selectedDateTime ?: currentTimeMillis,
                 duration = duration,
-                distance = distance,
+                distance = distanceInMiles,
                 calories = calories,
                 heartRate = heartRate,
                 comment = ""     

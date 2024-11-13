@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TranQuangNgoc_Cao_MyRuns2"
+rootProject.name = "TranQuangNgoc_Cao_MyRuns"
 include(":app")
  

@@ -48,6 +48,7 @@ class StartFragment : Fragment() {
                 }
                 "GPS"-> {
                     val intent = Intent(requireContext(), MapDisplayActivity::class.java)
+                    intent.putExtra("activity_type", spinnerActivityType.selectedItem.toString())
                     startActivity(intent)
                 }
                 "Automatic" -> {

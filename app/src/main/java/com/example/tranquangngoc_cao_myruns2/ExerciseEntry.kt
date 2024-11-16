@@ -15,4 +15,10 @@ data class ExerciseEntry (
     val calories: Int,
     val heartRate: Int,
     val comment: String,
+
+    // New fields for GPS entries
+    val avgSpeed: Double = 0.0,
+    val curSpeed: Double = 0.0,
+    val climb: Double = 0.0,
+    val locationList: String? = null
 )

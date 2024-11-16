@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [ExerciseEntry::class], version = 1)
+@Database(entities = [ExerciseEntry::class], version = 2)
 abstract class ExerciseDatabase : RoomDatabase() {
     abstract fun exerciseDao(): ExerciseEntryDao
 
@@ -19,7 +19,7 @@ abstract class ExerciseDatabase : RoomDatabase() {
                     context.applicationContext,
                     ExerciseDatabase::class.java,
                     "exercise_database"
-                ).build()
+                ).addMigrations(DatabaseMigrations.MIGRATION_1_2).build()
                 INSTANCE = instance
                 instance
             }

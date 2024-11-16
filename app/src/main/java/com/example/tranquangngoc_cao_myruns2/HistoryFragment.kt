@@ -43,8 +43,11 @@ class HistoryFragment: Fragment()  {
 
         // Initialize adapter
         adapter = HistoryAdapter(emptyList(), useMetric) { entry ->
-            // Handle item click - navigate to detail view
-            val intent = Intent(requireContext(), DisplayEntryActivity::class.java)
+            // Launch appropriate activity based on input type
+            val intent = when (entry.inputType) {
+                "GPS" -> Intent(requireContext(), MapDetailActivity::class.java)  // We'll create this next
+                else -> Intent(requireContext(), DisplayEntryActivity::class.java)
+            }
             intent.putExtra("entry_id", entry.id)
             startActivity(intent)
         }
@@ -67,7 +70,10 @@ class HistoryFragment: Fragment()  {
 
             // Create new adapter instance with current preference
             adapter = HistoryAdapter(entries, useMetric) { entry ->
-                val intent = Intent(requireContext(), DisplayEntryActivity::class.java)
+                val intent = when (entry.inputType) {
+                    "GPS" -> Intent(requireContext(), MapDetailActivity::class.java)  // We'll create this next
+                    else -> Intent(requireContext(), DisplayEntryActivity::class.java)
+                }
                 intent.putExtra("entry_id", entry.id)
                 startActivity(intent)
             }

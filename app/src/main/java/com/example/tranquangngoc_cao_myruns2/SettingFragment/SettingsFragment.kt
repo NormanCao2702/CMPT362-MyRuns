@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2
+package com.example.tranquangngoc_cao_myruns2.SettingFragment
 
 import android.content.Context
 import android.content.Intent
@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import android.app.AlertDialog
 import android.widget.EditText
 import android.net.Uri
+import com.example.tranquangngoc_cao_myruns2.R
+import com.example.tranquangngoc_cao_myruns2.UserProfile.UserProfileActivity
 
 class SettingsFragment: Fragment()  {
 

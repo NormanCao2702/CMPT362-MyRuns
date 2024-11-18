@@ -1,17 +1,18 @@
-package com.example.tranquangngoc_cao_myruns2
+package com.example.tranquangngoc_cao_myruns2.ManualActivity
 
 import android.os.Bundle
 import android.text.InputType
 import android.widget.Button
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.TimePicker
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.tranquangngoc_cao_myruns2.Database.ExerciseDatabase
+import com.example.tranquangngoc_cao_myruns2.Database.ExerciseEntry
+import com.example.tranquangngoc_cao_myruns2.Database.ExerciseRepository
+import com.example.tranquangngoc_cao_myruns2.R
+import com.example.tranquangngoc_cao_myruns2.Util.UnitConverter
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat

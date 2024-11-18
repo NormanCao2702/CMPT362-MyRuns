@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2
+package com.example.tranquangngoc_cao_myruns2.Util
 
 import android.Manifest
 import android.app.Activity

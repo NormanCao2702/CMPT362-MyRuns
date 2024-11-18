@@ -10,6 +10,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.tranquangngoc_cao_myruns2.HistoryFragment.HistoryFragment
+import com.example.tranquangngoc_cao_myruns2.SettingFragment.SettingsFragment
+import com.example.tranquangngoc_cao_myruns2.StartFragment.StartFragment
 
 class MainActivity : AppCompatActivity() {
 

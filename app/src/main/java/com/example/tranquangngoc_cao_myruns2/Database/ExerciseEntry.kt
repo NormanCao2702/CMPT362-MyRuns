@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2
+package com.example.tranquangngoc_cao_myruns2.Database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

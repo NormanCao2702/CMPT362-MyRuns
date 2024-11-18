@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2
+package com.example.tranquangngoc_cao_myruns2.GoogleMap
 
 import android.content.ComponentName
 import android.content.ServiceConnection
@@ -40,9 +40,14 @@ class MapViewModel : ViewModel(), ServiceConnection {
     private val _locationPoints = MutableLiveData<List<LatLng>>()
     val locationPoints: LiveData<List<LatLng>> = _locationPoints
 
+    private val _startTime = MutableLiveData<Long>()
+    val startTime: LiveData<Long> = _startTime
+
     // Service connection state
     private val _isServiceBound = MutableLiveData<Boolean>()
     val isServiceBound: LiveData<Boolean> = _isServiceBound
+
+
 
     override fun onServiceConnected(name: ComponentName, service: IBinder) {
         val binder = service as TrackingService.MyBinder
@@ -60,6 +65,7 @@ class MapViewModel : ViewModel(), ServiceConnection {
                 val bundle = msg.data
 
                 // Update LiveData with received values
+                _startTime.value = bundle.getLong("START_TIME")
                 _distance.value = bundle.getDouble("DISTANCE")
                 _currentSpeed.value = bundle.getDouble("CURRENT_SPEED")
                 _averageSpeed.value = bundle.getDouble("AVERAGE_SPEED")
@@ -81,96 +87,9 @@ class MapViewModel : ViewModel(), ServiceConnection {
         }
     }
 
-    // Helper method to check if we have necessary data
-    fun hasValidData(): Boolean {
-        return !_locationPoints.value.isNullOrEmpty()
-    }
-
     // Clean up
     override fun onCleared() {
         super.onCleared()
         _isServiceBound.value = false
     }
 }
-
-//class MapViewModel : ViewModel() {
-//    // Location and map related data
-//    private val _locationPoints = MutableLiveData<List<LatLng>>()
-//    val locationPoints: LiveData<List<LatLng>> = _locationPoints
-//
-//    // Exercise stats
-//    private val _exerciseStats = MutableLiveData<ExerciseStats>()
-//    val exerciseStats: LiveData<ExerciseStats> = _exerciseStats
-//
-//    // Service connection state
-//    private val _isServiceBound = MutableLiveData<Boolean>()
-//    val isServiceBound: LiveData<Boolean> = _isServiceBound
-//
-//    // Service reference
-//    private var trackingService: TrackingService? = null
-//
-//    // Methods to update from service
-//    fun updateFromService(service: TrackingService) {
-//        trackingService = service
-//        observeServiceData()
-//    }
-//
-//    data class ExerciseStats(
-//        val distance: Double,
-//        val currentSpeed: Double,
-//        val avgSpeed: Double,
-//        val calories: Int,
-//        val isMetric: Boolean
-//    )
-//
-//    private fun observeServiceData() {
-//        trackingService?.let { service ->
-//            service.locationUpdates.observeForever { points ->
-//                _locationPoints.postValue(points)
-//            }
-//
-//            service.exerciseStats.observeForever { stats ->
-//                _exerciseStats.postValue(
-//                    ExerciseStats(
-//                        distance = stats.distance,
-//                        currentSpeed = stats.currentSpeed,
-//                        avgSpeed = stats.avgSpeed,
-//                        calories = stats.calories,
-//                        isMetric = false  // Will be converted in UI layer
-//                    )
-//                )
-//            }
-//        }
-//    }
-//
-//    fun setServiceBound(bound: Boolean) {
-//        _isServiceBound.value = bound
-//    }
-//
-//    // Methods to get final data for saving
-//    fun getFinalData(): ExerciseData? {
-//        return trackingService?.let { service ->
-//            ExerciseData(
-//                points = service.getAllPoints(),
-//                stats = service.getFinalStats(),
-//                startTime = service.getStartTime()
-//            )
-//        }
-//    }
-//
-//    data class ExerciseData(
-//        val points: List<LatLng>,
-//        val stats: TrackingService.ExerciseStats?,
-//        val startTime: Long
-//    )
-//
-//    override fun onCleared() {
-//        super.onCleared()
-//        // Clean up observers
-//        trackingService?.let { service ->
-//            service.locationUpdates.removeObserver { }
-//            service.exerciseStats.removeObserver { }
-//        }
-//        trackingService = null
-//    }
-//}

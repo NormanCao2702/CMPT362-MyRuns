@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2
+package com.example.tranquangngoc_cao_myruns2.UserProfile
 
 import android.app.Activity
 import android.content.Intent
@@ -23,6 +23,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.tranquangngoc_cao_myruns2.R
+import com.example.tranquangngoc_cao_myruns2.Util.Util
 
 class UserProfileActivity : AppCompatActivity() {
 

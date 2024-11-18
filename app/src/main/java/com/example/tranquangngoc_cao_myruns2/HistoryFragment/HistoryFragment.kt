@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2
+package com.example.tranquangngoc_cao_myruns2.HistoryFragment
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tranquangngoc_cao_myruns2.Database.ExerciseDatabase
+import com.example.tranquangngoc_cao_myruns2.Database.ExerciseRepository
+import com.example.tranquangngoc_cao_myruns2.HistoryDetail.DisplayEntryActivity
+import com.example.tranquangngoc_cao_myruns2.HistoryDetail.MapDetailActivity
+import com.example.tranquangngoc_cao_myruns2.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

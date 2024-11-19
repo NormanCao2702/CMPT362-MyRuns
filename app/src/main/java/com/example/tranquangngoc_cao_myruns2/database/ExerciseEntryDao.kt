@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2.Database
+package com.example.tranquangngoc_cao_myruns2.database
 
 import androidx.room.Dao
 import androidx.room.Delete

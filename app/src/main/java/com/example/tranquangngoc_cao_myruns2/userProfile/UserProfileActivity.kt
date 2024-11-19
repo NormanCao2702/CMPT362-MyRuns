@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2.UserProfile
+package com.example.tranquangngoc_cao_myruns2.userProfile
 
 import android.app.Activity
 import android.content.Intent
@@ -24,7 +24,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.tranquangngoc_cao_myruns2.R
-import com.example.tranquangngoc_cao_myruns2.Util.Util
+import com.example.tranquangngoc_cao_myruns2.util.Util
 
 class UserProfileActivity : AppCompatActivity() {
 

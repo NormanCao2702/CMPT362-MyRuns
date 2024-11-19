@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2.Database
+package com.example.tranquangngoc_cao_myruns2.database
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase

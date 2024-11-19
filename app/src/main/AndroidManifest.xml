@@ -29,7 +29,7 @@
         tools:targetApi="31">
 
         <service
-            android:name=".GoogleMap.TrackingService"
+            android:name=".googleMap.TrackingService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="location" />
@@ -47,11 +47,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ManualActivity.ManualEntryActivity" />
-        <activity android:name=".UserProfile.UserProfileActivity" />
-        <activity android:name=".GoogleMap.MapDisplayActivity" />
-        <activity android:name=".HistoryDetail.DisplayEntryActivity" />
-        <activity android:name=".HistoryDetail.MapDetailActivity" />
+        <activity android:name=".manualActivity.ManualEntryActivity" />
+        <activity android:name=".userProfile.UserProfileActivity" />
+        <activity android:name=".googleMap.MapDisplayActivity" />
+        <activity android:name=".historyDetail.DisplayEntryActivity" />
+        <activity android:name=".historyDetail.MapDetailActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.tranquangngoc_cao_myruns2.fileprovider"

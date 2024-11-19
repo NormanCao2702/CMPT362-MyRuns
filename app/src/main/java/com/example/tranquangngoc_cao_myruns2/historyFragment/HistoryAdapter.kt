@@ -1,14 +1,14 @@
-package com.example.tranquangngoc_cao_myruns2.HistoryFragment
+package com.example.tranquangngoc_cao_myruns2.historyFragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseEntry
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseEntry
 import com.example.tranquangngoc_cao_myruns2.R
-import com.example.tranquangngoc_cao_myruns2.Util.UnitConverter
-import com.example.tranquangngoc_cao_myruns2.Util.Util
+import com.example.tranquangngoc_cao_myruns2.util.UnitConverter
+import com.example.tranquangngoc_cao_myruns2.util.Util
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

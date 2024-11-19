@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2.GoogleMap
+package com.example.tranquangngoc_cao_myruns2.googleMap
 
 import android.content.ComponentName
 import android.content.ServiceConnection

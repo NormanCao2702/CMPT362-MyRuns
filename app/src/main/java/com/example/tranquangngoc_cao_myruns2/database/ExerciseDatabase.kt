@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2.Database
+package com.example.tranquangngoc_cao_myruns2.database
 
 import android.content.Context
 import androidx.room.Database

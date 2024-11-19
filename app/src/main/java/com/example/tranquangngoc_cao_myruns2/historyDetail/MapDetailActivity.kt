@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2.HistoryDetail
+package com.example.tranquangngoc_cao_myruns2.historyDetail
 
 import android.content.Context
 import android.graphics.Color
@@ -7,11 +7,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseDatabase
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseEntry
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseRepository
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseDatabase
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseEntry
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseRepository
 import com.example.tranquangngoc_cao_myruns2.R
-import com.example.tranquangngoc_cao_myruns2.Util.UnitConverter
+import com.example.tranquangngoc_cao_myruns2.util.UnitConverter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

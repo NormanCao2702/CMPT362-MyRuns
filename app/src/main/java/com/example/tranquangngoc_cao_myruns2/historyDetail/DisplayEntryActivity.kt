@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2.HistoryDetail
+package com.example.tranquangngoc_cao_myruns2.historyDetail
 
 import android.app.Activity
 import android.os.Bundle
@@ -6,12 +6,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseDatabase
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseEntry
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseRepository
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseDatabase
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseEntry
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseRepository
 import com.example.tranquangngoc_cao_myruns2.R
-import com.example.tranquangngoc_cao_myruns2.Util.UnitConverter
-import com.example.tranquangngoc_cao_myruns2.Util.Util
+import com.example.tranquangngoc_cao_myruns2.util.UnitConverter
+import com.example.tranquangngoc_cao_myruns2.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-package com.example.tranquangngoc_cao_myruns2.GoogleMap
+package com.example.tranquangngoc_cao_myruns2.googleMap
 
 import android.Manifest
 import android.content.Context
@@ -19,9 +19,9 @@ import androidx.appcompat.widget.Toolbar
 import kotlinx.coroutines.*
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseDatabase
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseEntry
-import com.example.tranquangngoc_cao_myruns2.Database.ExerciseRepository
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseDatabase
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseEntry
+import com.example.tranquangngoc_cao_myruns2.database.ExerciseRepository
 import com.example.tranquangngoc_cao_myruns2.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

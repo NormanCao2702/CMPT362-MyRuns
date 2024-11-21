@@ -65,7 +65,7 @@
                 android:id="@+id/climbText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Climb: 0 Miles"
+                android:text="Climb: 0"
                 android:textColor="@android:color/black" />
 
             <TextView

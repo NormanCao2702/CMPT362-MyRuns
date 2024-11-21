@@ -66,8 +66,15 @@ class SensorService : Service(), SensorEventListener {
 
     private fun processDataBuffer() {
         try {
+            Log.d("SensorService", "-------- Start Processing --------")
+            Log.d("SensorService", "Raw Buffer Size: ${accBuffer.size}")
+            // Print first few raw accelerometer values
+            Log.d("SensorService", "Raw Acc Data Sample: X=${accBuffer[0]}, Y=${accBuffer[1]}, Z=${accBuffer[2]}")
             // Prepare FFT input
             val fft = FFT(ACCELEROMETER_BLOCK_CAPACITY)
+
+            // Lists to store features before normalization
+            val features = mutableListOf<Double>()
 
             // Process each axis
             var idx = 0
@@ -81,18 +88,41 @@ class SensorService : Service(), SensorEventListener {
                     im[j] = 0.0
                 }
 
+                Log.d("SensorService", "Axis $i - First few values before FFT: ${re.take(5)}")
+
                 // Apply FFT
                 fft.fft(re, im)
 
                 // Store FFT results
+//                var axisFeatures = mutableListOf<Double>()
+//                for (j in 0 until ACCELEROMETER_BLOCK_CAPACITY) {
+//                    val feature = Math.sqrt(re[j] * re[j] + im[j] * im[j])
+//                    featuresBuffer[idx++] = feature
+//                    axisFeatures.add(feature)
+//                }
+                // Calculate and store magnitudes
                 for (j in 0 until ACCELEROMETER_BLOCK_CAPACITY) {
-                    featuresBuffer[idx++] = Math.sqrt(re[j] * re[j] + im[j] * im[j])
+                    val magnitude = Math.sqrt(re[j] * re[j] + im[j] * im[j])
+                    features.add(magnitude)
                 }
+//                Log.d("SensorService", "Axis $i - First few FFT features: ${axisFeatures.take(5)}")
             }
+
+            // Normalize features
+            val maxFeature = features.maxOrNull() ?: 1.0
+            for (feature in features) {
+                // Normalize to range 0-20 to match classifier expectations
+                featuresBuffer[idx++] = (feature / maxFeature) * 20.0
+            }
+
+            Log.d("SensorService", "Classifier Key Values:")
+            Log.d("SensorService", "i[0] = ${featuresBuffer[0]}, Threshold = 13.390311")
+            Log.d("SensorService", "i[64] = ${featuresBuffer[64]}, Threshold = 14.534508")
 
             // Classify activity
             val activityType = WekaClassifier.classify(featuresBuffer)
             Log.d("SensorService", "Classified Activity: $activityType")
+            Log.d("SensorService", "-------- End Processing --------")
 
             // Send result to activity
             sendActivityUpdate(activityType)

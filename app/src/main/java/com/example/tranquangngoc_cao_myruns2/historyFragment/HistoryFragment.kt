@@ -51,6 +51,7 @@ class HistoryFragment: Fragment()  {
             // Launch appropriate activity based on input type
             val intent = when (entry.inputType) {
                 "GPS" -> Intent(requireContext(), MapDetailActivity::class.java)  // We'll create this next
+                "Automatic" -> Intent(requireContext(), MapDetailActivity::class.java)
                 else -> Intent(requireContext(), DisplayEntryActivity::class.java)
             }
             intent.putExtra("entry_id", entry.id)
@@ -77,6 +78,7 @@ class HistoryFragment: Fragment()  {
             adapter = HistoryAdapter(entries, useMetric) { entry ->
                 val intent = when (entry.inputType) {
                     "GPS" -> Intent(requireContext(), MapDetailActivity::class.java)  // We'll create this next
+                    "Automatic" -> Intent(requireContext(), MapDetailActivity::class.java)
                     else -> Intent(requireContext(), DisplayEntryActivity::class.java)
                 }
                 intent.putExtra("entry_id", entry.id)

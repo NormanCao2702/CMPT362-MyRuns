@@ -55,7 +55,9 @@ class StartFragment : Fragment() {
                     startActivity(intent)
                 }
                 "Automatic" -> {
-                    Toast.makeText(requireContext(), "Button clicked", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireContext(), MapDisplayActivity::class.java)
+                    intent.putExtra("input_type", "Automatic")
+                    startActivity(intent)
                 }
             }
         }

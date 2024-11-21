@@ -23,6 +23,8 @@ import com.example.tranquangngoc_cao_myruns2.database.ExerciseDatabase
 import com.example.tranquangngoc_cao_myruns2.database.ExerciseEntry
 import com.example.tranquangngoc_cao_myruns2.database.ExerciseRepository
 import com.example.tranquangngoc_cao_myruns2.R
+import com.example.tranquangngoc_cao_myruns2.automatic.Globals
+import com.example.tranquangngoc_cao_myruns2.automatic.SensorService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -41,6 +43,7 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
     private var polyline: Polyline? = null
     private var currentLocationMarker: Marker? = null
     private var startLocationMarker: Marker? = null
+    private var currentActivityType: String = "Standing" // Default value
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
@@ -62,6 +65,9 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
     private var isMetric: Boolean = false
     private var activityType: String = "Running"
 
+    // Existing properties remain the same
+    private var isAutomaticMode: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map_display)
@@ -75,9 +81,19 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
         initializeViews()
         loadUnitPreference()
 
-        // Get activity type from intent
-        activityType = intent.getStringExtra("activity_type") ?: "Running"
-        typeText.text = "Type: $activityType"
+        // Check tracking mode from intent
+        val inputType = intent.getStringExtra("input_type") ?: "GPS"
+        isAutomaticMode = inputType == "Automatic"
+
+        if (isAutomaticMode) {
+            // Start with Standing as default for Automatic mode
+            currentActivityType = Globals.CLASS_LABEL_STANDING
+            typeText.text = "Type: $currentActivityType (Auto)"
+        } else {
+            // Use selected activity type for GPS mode
+            currentActivityType = intent.getStringExtra("activity_type") ?: "Running"
+            typeText.text = "Type: $currentActivityType"
+        }
 
         // Setup map
         val mapFragment = supportFragmentManager
@@ -88,6 +104,24 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
         setupButtons()
 
         checkLocationPermission()
+    }
+
+    private fun startServices() {
+        if (isAutomaticMode) {
+            // Start both services for automatic mode
+            startTrackingService()
+            startSensorService()
+        } else {
+            // Only start tracking service for GPS mode
+            startTrackingService()
+        }
+    }
+
+    private fun startSensorService() {
+        Intent(this, SensorService::class.java).also { intent ->
+            startService(intent)
+            bindService(intent, viewModel, Context.BIND_AUTO_CREATE)
+        }
     }
 
     private fun checkLocationPermission() {
@@ -138,7 +172,7 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
             )
         } else {
             // All permissions granted, start service
-            startTrackingService()
+            startServices()
             setupObservers()
         }
     }
@@ -157,7 +191,7 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
                         this,
                         Manifest.permission.ACCESS_FINE_LOCATION
                     ) == PackageManager.PERMISSION_GRANTED) {
-                    startTrackingService()
+                    startServices()
                     setupObservers()
                 } else {
                     // Show a more detailed explanation
@@ -238,10 +272,28 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
             calorieText.text = "Calorie: ${calories.toInt()}"
         }
 
-        viewModel.climb.observe(this) { climb ->
-            val displayClimb = if (isMetric) climb * 1.60934 else climb
-            val unit = if (isMetric) "Kilometers" else "Miles"
-            climbText.text = "Climb: %.1f %s".format(displayClimb, unit)
+        // Add activity type observer for automatic mode
+        if (isAutomaticMode) {
+            viewModel.activityType.observe(this) { newType ->
+                if (newType.isNotEmpty() && newType != currentActivityType) {
+                    currentActivityType = newType
+                    typeText.text = "Type: $currentActivityType (Auto)"
+
+                    // Optionally log activity type changes
+                    Log.d("MapActivity", "Activity type changed to: $currentActivityType")
+                }
+            }
+        }
+    }
+
+    private fun stopServices() {
+        // Stop tracking service
+        unbindService(viewModel)
+        stopService(Intent(this, TrackingService::class.java))
+
+        // Stop sensor service if in automatic mode
+        if (isAutomaticMode) {
+            stopService(Intent(this, SensorService::class.java))
         }
     }
 
@@ -309,10 +361,10 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
             val avg_speed = viewModel.averageSpeed.value ?: 0.0
 
             val entry = ExerciseEntry(
-                inputType = "GPS",
-                activityType = activityType,
+                inputType = if (isAutomaticMode) "Automatic" else "GPS",
+                activityType = currentActivityType,
                 dateTime = startTimeMillis,
-                duration = durationInMinutes,  // Use the duration value
+                duration = durationInMinutes,
                 distance = if (isMetric) distance * 1.60934 else distance,
                 avgSpeed = avg_speed,
                 calories = calories.toInt(),
@@ -325,6 +377,7 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
             val repository = ExerciseRepository(
                 ExerciseDatabase.getDatabase(this@MapDisplayActivity).exerciseDao()
             )
+
             repository.insertEntry(entry)
 
             withContext(Dispatchers.Main) {
@@ -342,7 +395,7 @@ class MapDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onDestroy() {
         super.onDestroy()
         if (viewModel.isServiceBound.value == true) {
-            unbindService(viewModel)
+            stopServices()
         }
     }
 }

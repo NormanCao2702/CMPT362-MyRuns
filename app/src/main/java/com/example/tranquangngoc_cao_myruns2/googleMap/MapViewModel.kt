@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.tranquangngoc_cao_myruns2.automatic.SensorService
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -47,40 +48,69 @@ class MapViewModel : ViewModel(), ServiceConnection {
     private val _isServiceBound = MutableLiveData<Boolean>()
     val isServiceBound: LiveData<Boolean> = _isServiceBound
 
+    // Add new LiveData for activity type
+    private val _activityType = MutableLiveData<String>()
+    val activityType: LiveData<String> = _activityType
 
+    // Keep track of both services
+    private var isSensorServiceBound = false
+    private var sensorBinder: SensorService.SensorBinder? = null
 
     override fun onServiceConnected(name: ComponentName, service: IBinder) {
-        val binder = service as TrackingService.MyBinder
-        binder.setmsgHandler(messageHandler)
-        _isServiceBound.value = true
+        when (service) {
+            is TrackingService.MyBinder -> {
+                service.setmsgHandler(messageHandler)
+                _isServiceBound.value = true
+            }
+            is SensorService.SensorBinder -> {
+                sensorBinder = service
+                service.setHandler(messageHandler)
+                isSensorServiceBound = true
+            }
+        }
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
-        _isServiceBound.value = false
+        when (name?.className) {
+            SensorService::class.java.name -> {
+                isSensorServiceBound = false
+                sensorBinder = null
+            }
+            else -> {
+                _isServiceBound.value = false
+            }
+        }
     }
 
     inner class MessageHandler(looper: Looper) : Handler(looper) {
         override fun handleMessage(msg: Message) {
-            if (msg.what == TrackingService.MSG_INT_VALUE) {
-                val bundle = msg.data
+            when (msg.what) {
+                TrackingService.MSG_INT_VALUE -> {
+                    // Existing tracking service handling remains the same
+                    val bundle = msg.data
 
-                // Update LiveData with received values
-                _startTime.value = bundle.getLong("START_TIME")
-                _distance.value = bundle.getDouble("DISTANCE")
-                _currentSpeed.value = bundle.getDouble("CURRENT_SPEED")
-                _averageSpeed.value = bundle.getDouble("AVERAGE_SPEED")
-                _calories.value = bundle.getDouble("CALORIES")
-                _climb.value = bundle.getDouble("CLIMB")
-                _duration.value = bundle.getDouble("DURATION")
+                    _startTime.value = bundle.getLong("START_TIME")
+                    _distance.value = bundle.getDouble("DISTANCE")
+                    _currentSpeed.value = bundle.getDouble("CURRENT_SPEED")
+                    _averageSpeed.value = bundle.getDouble("AVERAGE_SPEED")
+                    _calories.value = bundle.getDouble("CALORIES")
+                    _climb.value = bundle.getDouble("CLIMB")
+                    _duration.value = bundle.getDouble("DURATION")
 
-                // Handle location points
-                bundle.getString("LOCATION")?.let { locationJson ->
-                    try {
-                        val type = object : TypeToken<List<LatLng>>() {}.type
-                        val points = Gson().fromJson<List<LatLng>>(locationJson, type)
-                        _locationPoints.value = points
-                    } catch (e: Exception) {
-                        Log.e("MapViewModel", "Error parsing location data", e)
+                    bundle.getString("LOCATION")?.let { locationJson ->
+                        try {
+                            val type = object : TypeToken<List<LatLng>>() {}.type
+                            val points = Gson().fromJson<List<LatLng>>(locationJson, type)
+                            _locationPoints.value = points
+                        } catch (e: Exception) {
+                            Log.e("MapViewModel", "Error parsing location data", e)
+                        }
+                    }
+                }
+                SensorService.MSG_ACTIVITY_TYPE -> {
+                    // Handle activity type updates from sensor service
+                    msg.obj?.let { activityType ->
+                        _activityType.value = activityType.toString()
                     }
                 }
             }
@@ -91,5 +121,6 @@ class MapViewModel : ViewModel(), ServiceConnection {
     override fun onCleared() {
         super.onCleared()
         _isServiceBound.value = false
+        isSensorServiceBound = false
     }
 }

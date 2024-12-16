@@ -4,7 +4,8 @@
 * The idea is designed and introduced by Professor of the class [Xingdong Yang](https://www.sfu.ca/~xingdong/)
 ## Short Demo
 * **Location Tracking Service**:
-https://github.com/user-attachments/assets/122095b8-2aec-45e3-9c3f-9bc46514cbc8
+
+https://github.com/user-attachments/assets/789b893f-29cd-4684-9e7a-a0155216276e
 * **History Fragment**:
 https://github.com/user-attachments/assets/3129c8ae-fd14-4f31-9e9b-3b65de905754
 * **Settings Fragment**:

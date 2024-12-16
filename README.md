@@ -7,8 +7,10 @@
 
 https://github.com/user-attachments/assets/789b893f-29cd-4684-9e7a-a0155216276e
 * **History Fragment**:
+  
 https://github.com/user-attachments/assets/3129c8ae-fd14-4f31-9e9b-3b65de905754
 * **Settings Fragment**:
+
 https://github.com/user-attachments/assets/5d4be2c1-fbc8-4617-a622-dc5c4c556828
 ## Usage Guidance:
 * Download Android Studio, clone/download the repo, insert your own Google API key in `local properties file` from Google Console, and run the app!
